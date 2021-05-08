@@ -39,7 +39,7 @@ public final class Chained<X, Y, Z> implements Func<X, Z> {
     /**
      * Before function.
      */
-    private final Func<X, Y> before;
+    private final Func<X, ? extends Y> before;
 
     /**
      * Functions.
@@ -49,7 +49,7 @@ public final class Chained<X, Y, Z> implements Func<X, Z> {
     /**
      * After function.
      */
-    private final Func<Y, Z> after;
+    private final Func<? super Y, Z> after;
 
     /**
      * Ctor.
@@ -57,8 +57,8 @@ public final class Chained<X, Y, Z> implements Func<X, Z> {
      * @param list Functions
      * @param atr After function
      */
-    public Chained(final Func<X, Y> bfr, final Iterable<Func<Y, Y>> list,
-        final Func<Y, Z> atr) {
+    public Chained(final Func<X, ? extends Y> bfr, final Iterable<Func<Y, Y>> list,
+        final Func<? super Y, Z> atr) {
         this.before = bfr;
         this.funcs = list;
         this.after = atr;
